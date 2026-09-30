@@ -1,0 +1,395 @@
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --border:#e1e4e9; --text:#1f2430; --muted:#6b7280;
+  --accent:#4f5fe8; --accent-dark:#3a47c4; --danger:#e5484d; --danger-dark:#c53a3e;
+  --radius:10px;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+#app{display:flex;flex-direction:column;height:100vh;}
+
+header{display:flex;align-items:center;justify-content:space-between;padding:10px 18px;background:var(--panel);border-bottom:1px solid var(--border);-webkit-app-region:drag;}
+header h1{font-size:16px;margin:0;font-weight:600;}
+header .actions{display:flex;align-items:center;gap:8px;-webkit-app-region:no-drag;}
+.save-status{font-size:11px;color:var(--muted);margin-right:4px;}
+button{cursor:pointer;border:1px solid var(--border);background:var(--panel);color:var(--text);border-radius:8px;padding:7px 12px;font-size:13px;font-weight:500;transition:.15s;}
+button:hover{background:#f0f1f5;}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+button.primary:hover{background:var(--accent-dark);}
+button.danger{background:var(--danger);color:#fff;border-color:var(--danger);}
+button.danger:hover{background:var(--danger-dark);}
+button.ghost{background:transparent;border-color:transparent;}
+
+#body{flex:1;display:flex;overflow:hidden;}
+
+#sidebar{width:270px;flex-shrink:0;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;}
+#sidebar .sidebar-head{padding:12px 14px 8px;}
+#sidebar .sidebar-head h2{font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 8px;}
+#libraryList{flex:1;overflow-y:auto;padding:0 10px 10px;}
+
+.lib-item{display:flex;align-items:center;gap:8px;padding:8px 8px;border:1px solid var(--border);border-radius:8px;margin-bottom:6px;background:#fff;cursor:grab;}
+.lib-item:active{cursor:grabbing;}
+.lib-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.lib-info{flex:1;min-width:0;}
+.lib-info .name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lib-info .type{font-size:11px;color:var(--muted);}
+.lib-item-actions{display:flex;gap:2px;}
+.lib-item-actions button{padding:3px 6px;font-size:12px;}
+
+#canvasWrap{
+  flex:1;
+  position:relative;
+  overflow:auto;
+  padding-bottom:40px;
+  background:var(--bg);
+}
+/* La cuadrícula pertenece al lienzo (no a su contenedor) para que escale con el
+   zoom y se desplace junto con los artefactos. */
+/* Reserva en el área desplazable exactamente el tamaño del lienzo ya escalado
+   (el tamaño lo fija el JS según el zoom); el lienzo se escala dentro de él. */
+#canvasSizer{
+  position:relative;
+  width:2400px;
+  height:1600px;
+}
+#canvas{
+  position:absolute;
+  top:0;
+  left:0;
+  width:2400px;
+  height:1600px;
+  transform-origin:0 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px),
+    linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+svg#lines{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+/* Capa aparte, por DEBAJO de las tarjetas (va antes en el HTML): solo sirve para
+   poder hacer clic en una línea y borrar la relación, sin taparle los botones ni
+   el arrastre a ningún nodo por el que pase la línea. */
+svg#linesHit{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+/* El color y el trazo (solido/discontinuo) de cada línea los fija el JS según el
+   tipo de relación (ver REL_STYLES); aquí solo el grosor y el estado atenuado. */
+svg#lines .rel-line{stroke-width:2.5;fill:none;pointer-events:none;transition:opacity .15s;}
+svg#lines .rel-line.dimmed{opacity:.12;}
+/* Franja invisible más ancha sobre cada línea: hace más fácil pinchar para
+   eliminar una relación sin depender de una etiqueta de texto. */
+svg#linesHit .rel-hit{fill:none;stroke:transparent;stroke-width:14;pointer-events:stroke;cursor:pointer;}
+svg#linesHit .rel-hit.dimmed{pointer-events:none;}
+
+.node{position:absolute;border-radius:9px;background:#fff;border:2px solid #c7cbd4;padding:8px 10px;min-width:130px;user-select:none;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:opacity .15s, filter .15s;}
+.node.connecting-src{outline:3px solid var(--accent);}
+.node.focused{outline:3px solid var(--accent);box-shadow:0 0 0 4px rgba(79,95,232,.15);}
+.node.dimmed{opacity:.22;filter:grayscale(60%);}
+.node-btns button.focus-active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.node .node-head{display:flex;align-items:center;gap:6px;cursor:grab;}
+.node.dragging .node-head{cursor:grabbing;}
+.node .node-icon{font-size:15px;}
+.node .node-name{font-size:12.5px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.node .node-type{font-size:10px;color:var(--muted);margin-top:1px;}
+.node .node-btns{position:absolute;top:-11px;right:4px;display:flex;gap:2px;}
+.node .node-btns button{padding:1px 4px;font-size:11px;line-height:16px;border-radius:5px;}
+
+.node.server{min-width:220px;min-height:120px;background:#f6f7fb;border-style:dashed;}
+.server-inner{position:relative;margin-top:8px;min-height:60px;border:1px dashed #c7cbd4;border-radius:7px;background:rgba(255,255,255,.6);}
+.server-inner .node{position:absolute;}
+
+#canvasHint{
+  position:fixed;
+  left:270px;
+  right:0;
+  bottom:0;
+  z-index:1000;
+  padding:8px 12px;
+  font-size:12px;
+  color:var(--muted);
+  background:#fff;
+  border-top:1px solid var(--border);
+  border-radius:0;
+}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(20,22,30,.45);display:flex;align-items:center;justify-content:center;z-index:50;}
+.modal{background:#fff;border-radius:12px;width:420px;max-width:92vw;max-height:88vh;overflow-y:auto;padding:20px;}
+.modal h3{margin:0 0 14px;font-size:15px;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;}
+.field input[type=text], .field select, .field textarea{width:100%;padding:8px 9px;border:1px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;}
+.field textarea{resize:vertical;min-height:56px;}
+.type-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.type-opt{border:1px solid var(--border);border-radius:8px;padding:6px 4px;text-align:center;cursor:pointer;font-size:11px;}
+.type-opt.selected{border-color:var(--accent);background:#eef0ff;}
+.type-opt .ic{font-size:18px;}
+.prop-row{display:flex;gap:6px;margin-bottom:6px;}
+.prop-row input{flex:1;padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12.5px;}
+.prop-row button{padding:5px 8px;}
+.modal-actions{display:flex;justify-content:space-between;margin-top:16px;gap:8px;}
+.modal-actions .right{display:flex;gap:8px;}
+
+#relTypeModal .rel-opt{display:flex;align-items:center;width:100%;text-align:left;margin-bottom:6px;}
+#relTypeModal .rel-swatch{display:inline-block;width:16px;height:4px;border-radius:2px;margin-right:8px;flex-shrink:0;}
+.empty-msg{color:var(--muted);font-size:12.5px;padding:14px 4px;text-align:center;}
+.lib-group{
+  margin-bottom:10px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  overflow:hidden;
+}
+
+.lib-group-header{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px;
+  background:#f5f5f5;
+  cursor:pointer;
+  font-weight:600;
+  user-select:none;
+}
+
+.lib-group-header:hover{
+  background:#ececec;
+}
+
+.toggle{
+  width:16px;
+}
+
+.group-icon{
+  font-size:18px;
+}
+
+.group-title{
+  flex:1;
+}
+
+.group-count{
+  color:#666;
+}
+
+.lib-group-content{
+  padding:4px;
+}
+
+/* Tirador para redimensionar manualmente los servidores */
+.server-resize-handle {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  width: 16px;
+  height: 16px;
+  cursor: nwse-resize;
+  z-index: 20;
+  border-right: 3px solid #667085;
+  border-bottom: 3px solid #667085;
+  border-radius: 0 0 5px 0;
+  box-sizing: border-box;
+  opacity: 0.65;
+  transition:
+    opacity 0.15s,
+    border-color 0.15s;
+}
+
+.server-resize-handle:hover {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+/* Estado del servidor mientras se redimensiona */
+.node.server.resizing {
+  outline: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(79, 95, 232, 0.15);
+}
+
+.node.server.resizing .server-resize-handle {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+/* Evita que la zona interior tape el tirador */
+.node.server .server-inner {
+  margin-bottom: 8px;
+}
+
+/* Elemento seleccionado para mostrar relaciones */
+.node.focused {
+  opacity: 1;
+  filter: none;
+  outline: 3px solid var(--accent);
+  box-shadow: 0 0 0 4px rgba(79, 95, 232, 0.15);
+  z-index: 10;
+}
+
+/* Elementos relacionados directa o transitivamente */
+.node:not(.dimmed) {
+  filter: none;
+}
+
+/* Elementos ajenos al conjunto de relaciones */
+.node.dimmed {
+  opacity: 0.22;
+  filter: grayscale(60%);
+}
+
+/* Líneas pertenecientes al conjunto transitivo */
+svg#lines .rel-line:not(.dimmed) {
+  opacity: 1;
+}
+
+/* Líneas que no forman parte del conjunto transitivo */
+svg#lines .rel-line.dimmed {
+  opacity: 0.12;
+}
+
+
+/* ---------- Buscador de la biblioteca ---------- */
+.lib-search{display:flex;flex-direction:column;gap:6px;}
+.lib-search input[type=search],
+.lib-search select{
+  width:100%;
+  padding:7px 9px;
+  border:1px solid var(--border);
+  border-radius:7px;
+  font-size:12.5px;
+  font-family:inherit;
+  background:#fff;
+  color:var(--text);
+}
+.lib-search input[type=search]:focus,
+.lib-search select:focus{
+  outline:2px solid rgba(79,95,232,.35);
+  border-color:var(--accent);
+}
+.lib-search-info{font-size:11px;color:var(--muted);min-height:0;}
+.lib-search-info:empty{display:none;}
+
+/* Propiedades que han coincidido con la búsqueda: fila propia a todo el ancho */
+.lib-item{flex-wrap:wrap;}
+.lib-item .hint{
+  flex:0 0 100%;
+  margin-top:2px;
+  padding:4px 0 0 36px;
+  border-top:1px dashed var(--border);
+  min-width:0;
+}
+.lib-item .hint-line{
+  font-size:10.5px;
+  line-height:1.35;
+  color:var(--muted);
+  overflow-wrap:anywhere;
+}
+.lib-item .hint-line b{color:var(--accent-dark);font-weight:600;}
+.lib-item .hint-more{font-style:italic;}
+
+/* ---------- Menú de tipo de relación: opción elegida iluminada ---------- */
+#relTypeModal .rel-opt.selected{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+  font-weight:600;
+}
+#relTypeModal .rel-opt.selected:hover{background:var(--accent-dark);}
+#relTypeModal .rel-opt.selected::before{content:'✓ ';}
+
+/* ---------- Anidado en servidores ---------- */
+/* Servidor que recibirá el artefacto que se está arrastrando */
+.node.drop-target{
+  outline:3px dashed var(--accent);
+  outline-offset:2px;
+  box-shadow:0 0 0 7px rgba(79,95,232,.14);
+}
+.node.drop-target .server-inner{
+  background:rgba(79,95,232,.10);
+  border-color:var(--accent);
+}
+/* El artefacto arrastrado siempre por encima del resto */
+.node.dragging{z-index:30;}
+
+/* ---------- Resultado de la búsqueda también en el lienzo ---------- */
+/* No coincide con la búsqueda: atenuado */
+.node.search-dim{opacity:.3;filter:grayscale(50%);}
+/* Atenuado por el foco 👁 y por la búsqueda a la vez: el más tenue */
+.node.dimmed.search-dim{opacity:.18;}
+/* El artefacto en foco siempre se ve, aunque no coincida con la búsqueda */
+.node.focused.search-dim{opacity:1;filter:none;}
+/* Coincide con la búsqueda: resaltado ámbar y por encima de los vecinos */
+.node.search-hit{
+  outline:3px solid #f59e0b;
+  outline-offset:1px;
+  box-shadow:0 0 0 7px rgba(245,158,11,.25), 0 2px 8px rgba(0,0,0,.12);
+  z-index:5;
+}
+/* Coincide pero el foco 👁 lo había atenuado: se recupera lo justo para verse */
+.node.search-hit.dimmed{opacity:.75;filter:none;}
+
+
+/* ---------- Zoom del lienzo ---------- */
+#canvasHint{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+#canvasHint .hint-text{
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.zoom-controls{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  flex-shrink:0;
+}
+.zoom-controls button{
+  padding:2px 9px;
+  font-size:13px;
+  line-height:18px;
+  min-width:30px;
+}
+.zoom-controls #zoomReset{
+  min-width:52px;
+  font-variant-numeric:tabular-nums;
+}
+.zoom-controls button:disabled{
+  opacity:.4;
+  cursor:default;
+}
+
+
+/* ---------- Leyenda de tipos de relación ---------- */
+.legend-panel{
+  position:fixed;
+  top:58px;
+  right:12px;
+  z-index:900;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.10);
+  font-size:11.5px;
+  width:216px;
+  overflow:hidden;
+}
+.legend-toggle{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  width:100%;
+  padding:7px 10px;
+  background:#fafafa;
+  border:none;
+  border-radius:0;
+  font-weight:600;
+  font-size:11.5px;
+  color:var(--text);
+}
+.legend-toggle:hover{background:#f0f1f5;}
+.legend-title{text-align:left;}
+.legend-caret{color:var(--muted);font-size:10px;flex-shrink:0;}
+.legend-list{padding:7px 10px 9px;display:flex;flex-direction:column;gap:6px;max-height:55vh;overflow-y:auto;}
+.legend-panel.collapsed .legend-list{display:none;}
+.legend-row{display:flex;align-items:center;gap:8px;}
+.legend-swatch{flex-shrink:0;}
+.legend-label{color:var(--text);line-height:1.3;}

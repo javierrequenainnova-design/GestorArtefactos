@@ -1,0 +1,1641 @@
+{
+  "artifacts": [
+    {
+      "id": "idfl7bpoix",
+      "name": "Servidor Websphere",
+      "typeId": "servidor",
+      "description": "Servidor de aplicaciones Websphere",
+      "properties": [
+        {
+          "key": "Host Desarrollo",
+          "value": "was9desaeo"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "waseopre"
+        },
+        {
+          "key": "Host Producción",
+          "value": "eodmgrpro"
+        }
+      ]
+    },
+    {
+      "id": "id6cwl27d3",
+      "name": "Api Connect",
+      "typeId": "servidor",
+      "description": "Gestor de apis",
+      "properties": [
+        {
+          "key": "Host Desarrollo (Front)",
+          "value": "api-mngr-ui.apimanagerdesav10.creditoycaucion.es"
+        },
+        {
+          "key": "Host Preproducción (Front)",
+          "value": "api-mngr-ui.apimanagerprev10.creditoycaucion.es"
+        },
+        {
+          "key": "Host Producción (Front)",
+          "value": "api-mngr-ui.apimanagerprov10.creditoycaucion.es"
+        }
+      ]
+    },
+    {
+      "id": "id3945c82y",
+      "name": "Cliente Externo Iberinform",
+      "typeId": "usuario",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idngs1elu5",
+      "name": "Ftp Externo",
+      "typeId": "almacen",
+      "description": "",
+      "properties": [
+        {
+          "key": "Host",
+          "value": "ftppre"
+        },
+        {
+          "key": "Host",
+          "value": "ftppro"
+        }
+      ]
+    },
+    {
+      "id": "idkwcoxd1t",
+      "name": "Batch_EO",
+      "typeId": "servidor",
+      "description": "Servidor de procesos Batch EO",
+      "properties": [
+        {
+          "key": "Host Desarrollo",
+          "value": "cucutras"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "fortuna"
+        },
+        {
+          "key": "Host Producción",
+          "value": "acheron"
+        }
+      ]
+    },
+    {
+      "id": "idrkozps6h",
+      "name": "iberAutomatizacionInformes",
+      "typeId": "aplicacion",
+      "description": "Aplicación de automatización de generación y distribución de informes",
+      "properties": [
+        {
+          "key": "Proceso",
+          "value": "INTD50"
+        },
+        {
+          "key": "Proceso",
+          "value": "INTD51"
+        },
+        {
+          "key": "Proceso",
+          "value": "INTD60"
+        },
+        {
+          "key": "Proceso",
+          "value": "INTD61"
+        }
+      ]
+    },
+    {
+      "id": "id31xsv7ps",
+      "name": "EO",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de datos",
+          "value": "EO"
+        },
+        {
+          "key": "Esquema",
+          "value": "db2inst1"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "danubio:50000"
+        },
+        {
+          "key": "Host Preprodución",
+          "value": "pegaso:50020"
+        },
+        {
+          "key": "Host Producción",
+          "value": "eolo:50036"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    },
+    {
+      "id": "idskey31dx",
+      "name": "TALEND",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de datos",
+          "value": "EO"
+        },
+        {
+          "key": "esquema",
+          "value": "Talend"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "danubio:50000"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "pegaso:50020"
+        },
+        {
+          "key": "Host Producción",
+          "value": "eolo:50036"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    },
+    {
+      "id": "id45i9bojm",
+      "name": "IberDescEventApiConnect",
+      "typeId": "aplicacion",
+      "description": "Proceso encargado de la descarga de eventos de api connect",
+      "properties": [
+        {
+          "key": "Proceso",
+          "value": "INTD01"
+        }
+      ]
+    },
+    {
+      "id": "idhaedf84g",
+      "name": "IBERAPISUPPORT",
+      "typeId": "bd",
+      "description": "Base de datos que contiene la información de eventos de api connect",
+      "properties": [
+        {
+          "key": "Base de datos",
+          "value": "EOROBIN"
+        },
+        {
+          "key": "esquema",
+          "value": "IBERAPISUPPORT"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "danubio:50132"
+        },
+        {
+          "key": "Host Preprodución",
+          "value": "pegaso:50132"
+        },
+        {
+          "key": "Host Producción",
+          "value": "eolo:50132"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    },
+    {
+      "id": "idgtyupmtk",
+      "name": "ApiDescargaFicheros",
+      "typeId": "aplicacion",
+      "description": "Api para obtener imágenes de balances del resposítorio de ficheros",
+      "properties": []
+    },
+    {
+      "id": "id0dxnw6ej",
+      "name": "ApiDescargaFicheros",
+      "typeId": "api",
+      "description": "Api de descarga de imágenes de balances",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HINT0001"
+        }
+      ]
+    },
+    {
+      "id": "id4hv2wkkh",
+      "name": "Power Automate",
+      "typeId": "servidor",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idncetgdvy",
+      "name": "TendersES",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idwawupf7f",
+      "name": "TendersPT",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idpd6oc9m0",
+      "name": "Tenders",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "id9ew3xmck",
+      "name": "CyCTenders",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de datos",
+          "value": "CyCtenders_Dev"
+        },
+        {
+          "key": "Esquema",
+          "value": "dbo"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.33:1433"
+        },
+        {
+          "key": "Motor",
+          "value": "Sql Server"
+        }
+      ]
+    },
+    {
+      "id": "idwi7jjgfw",
+      "name": "Databricks",
+      "typeId": "servidor",
+      "description": "Servidor de Databricks",
+      "properties": []
+    },
+    {
+      "id": "idqxggh1xe",
+      "name": "TendersDatabricks",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idlb0d1h67",
+      "name": "Base gov",
+      "typeId": "externo",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idhpks2nl3",
+      "name": "TendersDatabicks Bronce ES",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproduccióm",
+          "value": "dataplatform01_central_uat_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "esquema",
+          "value": "bronze_raw_tenders_es"
+        },
+        {
+          "key": "Motor",
+          "value": "DataBricks"
+        }
+      ]
+    },
+    {
+      "id": "id24qzhbh0",
+      "name": "TendersDatabicks Bronce ES (copia)",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproduccióm",
+          "value": "dataplatform01_central_uat_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "esquema",
+          "value": "bronze_raw_tenders_es"
+        },
+        {
+          "key": "Motor",
+          "value": "DataBricks"
+        }
+      ]
+    },
+    {
+      "id": "id5qkipcz8",
+      "name": "LitcitacionesES",
+      "typeId": "externo",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idthz0rchs",
+      "name": "ServiceNow",
+      "typeId": "servicio",
+      "description": "Servicio de tickets",
+      "properties": []
+    },
+    {
+      "id": "idepp69egp",
+      "name": "ServiceNowMiddleware",
+      "typeId": "aplicacion",
+      "description": "Aplicacion que da de alta tickets en service Now",
+      "properties": []
+    },
+    {
+      "id": "idabykgus0",
+      "name": "IBERINTG",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de datos",
+          "value": "IBERINTG"
+        },
+        {
+          "key": "esquema",
+          "value": "SNMIDDLEWARE"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "danubio:25010"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "pegaso:25010"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.220:25010"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    },
+    {
+      "id": "idxlimsiqd",
+      "name": "Ftp balance",
+      "typeId": "almacen",
+      "description": "",
+      "properties": [
+        {
+          "key": "Host Desarrollo",
+          "value": ""
+        },
+        {
+          "key": "Host Preproducción",
+          "value": ""
+        },
+        {
+          "key": "Host Producción",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "idwec1lhn3",
+      "name": "Crawler AT",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idxquwsn0p",
+      "name": "Crawler SS",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idqi2jxne1",
+      "name": "Crawler Sicae",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "id1aktk0bs",
+      "name": "Crawler Lista de Ejecuciones",
+      "typeId": "pwa",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "ide7jaaeke",
+      "name": "Powe Automate Desktop",
+      "typeId": "servidor",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idv2trdcbg",
+      "name": "Crawler PT",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idpcs1je3k",
+      "name": "Crawler AT",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de Datos",
+          "value": "CyCtenders_Dev"
+        },
+        {
+          "key": "esquema",
+          "value": "CrawlerATDevedores"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.33:1433"
+        },
+        {
+          "key": "Motor",
+          "value": "Sql Server"
+        }
+      ]
+    },
+    {
+      "id": "idwlgdg1np",
+      "name": "Crawler SS",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de Datos",
+          "value": "CyCtenders_Dev"
+        },
+        {
+          "key": "Esquema",
+          "value": "CrawlerSSDevedores"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.33:1433"
+        },
+        {
+          "key": "Motor",
+          "value": "Sql Server"
+        }
+      ]
+    },
+    {
+      "id": "iddq4tvpww",
+      "name": "Crawler Sicae",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de Datos",
+          "value": "CyCtenders_Dev"
+        },
+        {
+          "key": "Esquema",
+          "value": "CrawlerSicae"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "wtenderprebbdd:1433"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.33:1433"
+        },
+        {
+          "key": "Motor",
+          "value": "Sql Server"
+        }
+      ]
+    },
+    {
+      "id": "idkekk0o1i",
+      "name": "Sharepoint Operaciones",
+      "typeId": "almacen",
+      "description": "",
+      "properties": [
+        {
+          "key": "url",
+          "value": "https://atradius.sharepoint.com/sites/DirecciondeOperaciones"
+        }
+      ]
+    },
+    {
+      "id": "idve12whrb",
+      "name": "CrawlerPTDatabricks",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idui8wjtej",
+      "name": "CrawlerPTDatabricks AT",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": ""
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": ""
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": ""
+        },
+        {
+          "key": "Esquema",
+          "value": ""
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "idos1o54rg",
+      "name": "BuscadorRepositorio",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "iddphv8wz0",
+      "name": "AccesoRepositorio",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idjbw03noi",
+      "name": "TendersDatabricks Bronce Global",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": "dataplatform01_central_uat_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "Esquema",
+          "value": "bronze_raw_tenders_global"
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "id6u4e2fpy",
+      "name": "TendersDatabricks Bronce PT",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": "dataplatform01_central_uat_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "Esquema",
+          "value": "bronze_raw_tenders_pt"
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "id1w9ham7k",
+      "name": "TendersDatabricks Silver ES",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": "dataplatform01_central_pre_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "Esquema",
+          "value": "silver_master_tenders_es"
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "id3czas7sx",
+      "name": "TendersDatabricks Silver PT",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": "dataplatform01_central_pre_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "Esquema",
+          "value": "silver_master_tenders_pt"
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "idjos7obc5",
+      "name": "TendersDatabricks Silver Global",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Catalogo Desarrollo",
+          "value": "dataplatform01_central_dev_catalog_01"
+        },
+        {
+          "key": "Catalogo Preproducción",
+          "value": "dataplatform01_central_pre_catalog_01"
+        },
+        {
+          "key": "Catalogo Producción",
+          "value": "dataplatform01_central_prd_catalog_01"
+        },
+        {
+          "key": "Esquema",
+          "value": "silver_master_tenders_global"
+        },
+        {
+          "key": "Motor",
+          "value": "Databricks"
+        }
+      ]
+    },
+    {
+      "id": "idvfn2jsrf",
+      "name": "activityincidents",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "id8ixt3clf",
+      "name": "activity",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "idtzubf3gs",
+      "name": "actos-borme",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HIBE0001"
+        }
+      ]
+    },
+    {
+      "id": "idw3a0wnqd",
+      "name": "additionalfinancialdata",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "idcerhij5e",
+      "name": "affectedasplaintiffbankruptcyproceedings",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "idouzfo6n6",
+      "name": "affectedasplaintiff-legalproceedings",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "idthsrchmh",
+      "name": "alertas",
+      "typeId": "api",
+      "description": "",
+      "properties": [
+        {
+          "key": "Usuario Backend",
+          "value": "HAPI0001"
+        }
+      ]
+    },
+    {
+      "id": "idc9hw33nj",
+      "name": "Iberfaces",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "idrlop2p0q",
+      "name": "IberSentinel",
+      "typeId": "aplicacion",
+      "description": "",
+      "properties": []
+    },
+    {
+      "id": "id149zvwax",
+      "name": "Sentinel",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de Datos",
+          "value": "Sentinel"
+        },
+        {
+          "key": "Esquema",
+          "value": "II"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "danubio:50114"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "tamesis:50114"
+        },
+        {
+          "key": "Host Producción",
+          "value": "ganges:50114"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    },
+    {
+      "id": "idpbpeamkc",
+      "name": "Iberface",
+      "typeId": "bd",
+      "description": "",
+      "properties": [
+        {
+          "key": "Base de Datos",
+          "value": "iberface"
+        },
+        {
+          "key": "Esquema",
+          "value": "iberfaces"
+        },
+        {
+          "key": "Host Desarrollo",
+          "value": "172.17.1.161:50600"
+        },
+        {
+          "key": "Host Preproducción",
+          "value": "pegaso:50600"
+        },
+        {
+          "key": "Host Producción",
+          "value": "172.17.1.220:50600"
+        },
+        {
+          "key": "Motor",
+          "value": "DB2"
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "idjri7g255",
+      "artifactId": "idfl7bpoix",
+      "x": 812,
+      "y": 105,
+      "parentId": null,
+      "serverWidth": 293,
+      "serverHeight": 150
+    },
+    {
+      "id": "idin3acc9i",
+      "artifactId": "id6cwl27d3",
+      "x": 230,
+      "y": 18,
+      "parentId": null,
+      "serverWidth": 506,
+      "serverHeight": 275
+    },
+    {
+      "id": "idee3d3qvl",
+      "artifactId": "id3945c82y",
+      "x": 4,
+      "y": 590,
+      "parentId": null
+    },
+    {
+      "id": "idg3inmyxj",
+      "artifactId": "idngs1elu5",
+      "x": 245,
+      "y": 815,
+      "parentId": null
+    },
+    {
+      "id": "id0puhhdm4",
+      "artifactId": "idkwcoxd1t",
+      "x": 574,
+      "y": 739,
+      "parentId": null,
+      "serverWidth": 457,
+      "serverHeight": 157
+    },
+    {
+      "id": "id6c4qnn7o",
+      "artifactId": "idrkozps6h",
+      "x": 230,
+      "y": 15,
+      "parentId": "id0puhhdm4"
+    },
+    {
+      "id": "idnoqlxmou",
+      "artifactId": "id31xsv7ps",
+      "x": 1201,
+      "y": 737,
+      "parentId": null
+    },
+    {
+      "id": "idbvrs1rxn",
+      "artifactId": "idskey31dx",
+      "x": 1199,
+      "y": 811,
+      "parentId": null
+    },
+    {
+      "id": "id6sasyva0",
+      "artifactId": "idhaedf84g",
+      "x": 851,
+      "y": 606,
+      "parentId": null
+    },
+    {
+      "id": "id5nq8h15i",
+      "artifactId": "id45i9bojm",
+      "x": 23,
+      "y": 14,
+      "parentId": "id0puhhdm4"
+    },
+    {
+      "id": "idbs3mg98o",
+      "artifactId": "idgtyupmtk",
+      "x": 198,
+      "y": 14,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "iden6axrhx",
+      "artifactId": "id0dxnw6ej",
+      "x": 10,
+      "y": 6,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idqf4tku0c",
+      "artifactId": "id4hv2wkkh",
+      "x": 217,
+      "y": 960,
+      "parentId": null,
+      "serverWidth": 268,
+      "serverHeight": 151
+    },
+    {
+      "id": "idhe2x8nsw",
+      "artifactId": "idncetgdvy",
+      "x": 8,
+      "y": 11,
+      "parentId": "idqf4tku0c"
+    },
+    {
+      "id": "idld5mo733",
+      "artifactId": "idwawupf7f",
+      "x": 148,
+      "y": 14,
+      "parentId": "idqf4tku0c"
+    },
+    {
+      "id": "idg4nzftyr",
+      "artifactId": "idpd6oc9m0",
+      "x": 87,
+      "y": 89,
+      "parentId": "id0puhhdm4"
+    },
+    {
+      "id": "id0vmwrpa9",
+      "artifactId": "id9ew3xmck",
+      "x": 1199,
+      "y": 1081,
+      "parentId": null
+    },
+    {
+      "id": "ido8e2l1yy",
+      "artifactId": "idwi7jjgfw",
+      "x": 199,
+      "y": 1655,
+      "parentId": null
+    },
+    {
+      "id": "idb7u568aq",
+      "artifactId": "idqxggh1xe",
+      "x": 6,
+      "y": 6,
+      "parentId": "ido8e2l1yy"
+    },
+    {
+      "id": "idrdzjgsa1",
+      "artifactId": "idlb0d1h67",
+      "x": 12,
+      "y": 1132,
+      "parentId": null
+    },
+    {
+      "id": "idsti6844p",
+      "artifactId": "idhpks2nl3",
+      "x": 838,
+      "y": 1241,
+      "parentId": null
+    },
+    {
+      "id": "idxju13r5j",
+      "artifactId": "id5qkipcz8",
+      "x": 11,
+      "y": 1020,
+      "parentId": null
+    },
+    {
+      "id": "idbydd4hkn",
+      "artifactId": "idthz0rchs",
+      "x": 815,
+      "y": 20,
+      "parentId": null
+    },
+    {
+      "id": "id61fdfqzj",
+      "artifactId": "idepp69egp",
+      "x": 6,
+      "y": 14,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "id2jrf42sb",
+      "artifactId": "idabykgus0",
+      "x": 1064,
+      "y": 15,
+      "parentId": null
+    },
+    {
+      "id": "id9mx8en1y",
+      "artifactId": "idxlimsiqd",
+      "x": 1297,
+      "y": 115,
+      "parentId": null
+    },
+    {
+      "id": "id480yplm4",
+      "artifactId": "ide7jaaeke",
+      "x": 220,
+      "y": 1241,
+      "parentId": null
+    },
+    {
+      "id": "idvxiut695",
+      "artifactId": "id1aktk0bs",
+      "x": 275,
+      "y": 26,
+      "parentId": "id480yplm4"
+    },
+    {
+      "id": "idmj2snbt8",
+      "artifactId": "idqi2jxne1",
+      "x": 145,
+      "y": 81,
+      "parentId": "idqf4tku0c"
+    },
+    {
+      "id": "idmdvbqgtq",
+      "artifactId": "idxquwsn0p",
+      "x": 139,
+      "y": 24,
+      "parentId": "id480yplm4"
+    },
+    {
+      "id": "idzplsk3d5",
+      "artifactId": "idwec1lhn3",
+      "x": 6,
+      "y": 24,
+      "parentId": "id480yplm4"
+    },
+    {
+      "id": "id3gf44188",
+      "artifactId": "idv2trdcbg",
+      "x": 233,
+      "y": 86,
+      "parentId": "id0puhhdm4"
+    },
+    {
+      "id": "ido52v1sw3",
+      "artifactId": "idpcs1je3k",
+      "x": 1199,
+      "y": 879,
+      "parentId": null
+    },
+    {
+      "id": "idky7o13k7",
+      "artifactId": "idwlgdg1np",
+      "x": 1199,
+      "y": 947,
+      "parentId": null
+    },
+    {
+      "id": "idam6bo5ck",
+      "artifactId": "iddq4tvpww",
+      "x": 1198,
+      "y": 1012,
+      "parentId": null
+    },
+    {
+      "id": "idb1rk0zz6",
+      "artifactId": "idkekk0o1i",
+      "x": 843,
+      "y": 1135,
+      "parentId": null
+    },
+    {
+      "id": "id1c62hd9a",
+      "artifactId": "idve12whrb",
+      "x": 6,
+      "y": 78,
+      "parentId": "ido8e2l1yy"
+    },
+    {
+      "id": "idehcztxp4",
+      "artifactId": "idui8wjtej",
+      "x": 848.984375,
+      "y": 1846.65625,
+      "parentId": null
+    },
+    {
+      "id": "idmsan7r4i",
+      "artifactId": "idos1o54rg",
+      "x": 7,
+      "y": 148,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "idh3zyrp05",
+      "artifactId": "iddphv8wz0",
+      "x": 8,
+      "y": 81,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "idwcec3x4b",
+      "artifactId": "idjbw03noi",
+      "x": 839,
+      "y": 1313,
+      "parentId": null
+    },
+    {
+      "id": "idkkv7llmi",
+      "artifactId": "id6u4e2fpy",
+      "x": 839,
+      "y": 1383,
+      "parentId": null
+    },
+    {
+      "id": "idx0vpyg1b",
+      "artifactId": "id1w9ham7k",
+      "x": 839,
+      "y": 1455,
+      "parentId": null
+    },
+    {
+      "id": "id7tv1144y",
+      "artifactId": "idvfn2jsrf",
+      "x": 187,
+      "y": 6,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idmr9jb8l8",
+      "artifactId": "id8ixt3clf",
+      "x": 10,
+      "y": 72,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idtjnihlml",
+      "artifactId": "idtzubf3gs",
+      "x": 143,
+      "y": 73,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "ideh3c17cp",
+      "artifactId": "idw3a0wnqd",
+      "x": 6,
+      "y": 141,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idhdcvk8nm",
+      "artifactId": "idcerhij5e",
+      "x": 190,
+      "y": 138,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idjxowtvb9",
+      "artifactId": "idouzfo6n6",
+      "x": 6,
+      "y": 206,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "id5tsgex3x",
+      "artifactId": "idthsrchmh",
+      "x": 339,
+      "y": 7,
+      "parentId": "idin3acc9i"
+    },
+    {
+      "id": "idg3iaw5wz",
+      "artifactId": "idc9hw33nj",
+      "x": 199,
+      "y": 80,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "idl1maglte",
+      "artifactId": "idrlop2p0q",
+      "x": 197,
+      "y": 157,
+      "parentId": "idjri7g255"
+    },
+    {
+      "id": "idyszrp98m",
+      "artifactId": "id149zvwax",
+      "x": 1297,
+      "y": 377,
+      "parentId": null
+    },
+    {
+      "id": "id7u2aa2b9",
+      "artifactId": "idpbpeamkc",
+      "x": 1296,
+      "y": 265,
+      "parentId": null
+    },
+    {
+      "id": "idq8raqpru",
+      "artifactId": "id3czas7sx",
+      "x": 838,
+      "y": 1532,
+      "parentId": null
+    },
+    {
+      "id": "idjzrhud39",
+      "artifactId": "idjos7obc5",
+      "x": 842,
+      "y": 1606,
+      "parentId": null
+    }
+  ],
+  "relations": [
+    {
+      "id": "id2rmgs1cb",
+      "from": "idee3d3qvl",
+      "to": "idg3inmyxj",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "ids1bqt236",
+      "from": "id6c4qnn7o",
+      "to": "idnoqlxmou",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idoq50e0lg",
+      "from": "id6c4qnn7o",
+      "to": "idbvrs1rxn",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "iddh7gvuos",
+      "from": "id6c4qnn7o",
+      "to": "idg3inmyxj",
+      "type": "Publica(Fichero) en"
+    },
+    {
+      "id": "id86stqtzz",
+      "from": "id5nq8h15i",
+      "to": "id6sasyva0",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idjou4g7ju",
+      "from": "id5nq8h15i",
+      "to": "idin3acc9i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "id6n4ssbe6",
+      "from": "iden6axrhx",
+      "to": "idbs3mg98o",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "idf1yp8por",
+      "from": "idee3d3qvl",
+      "to": "idin3acc9i",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idpwkvz4rh",
+      "from": "idbs3mg98o",
+      "to": "idnoqlxmou",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idw34yxbdc",
+      "from": "idg4nzftyr",
+      "to": "idhe2x8nsw",
+      "type": "Depende de"
+    },
+    {
+      "id": "idm7x3mw6l",
+      "from": "idg4nzftyr",
+      "to": "id0vmwrpa9",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idnc68pub9",
+      "from": "idg4nzftyr",
+      "to": "idld5mo733",
+      "type": "Depende de"
+    },
+    {
+      "id": "id5itdaxqg",
+      "from": "idld5mo733",
+      "to": "idrdzjgsa1",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idtf82jevt",
+      "from": "idb7u568aq",
+      "to": "idrdzjgsa1",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id4utl99p1",
+      "from": "idb7u568aq",
+      "to": "idsti6844p",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idpe8jgf9e",
+      "from": "idhe2x8nsw",
+      "to": "idxju13r5j",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id99o8k7pt",
+      "from": "idb7u568aq",
+      "to": "idxju13r5j",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idm8ocq4na",
+      "from": "id61fdfqzj",
+      "to": "id2jrf42sb",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idjla24rz6",
+      "from": "id61fdfqzj",
+      "to": "idbydd4hkn",
+      "type": "Depende de"
+    },
+    {
+      "id": "id1liazk2i",
+      "from": "idbs3mg98o",
+      "to": "id9mx8en1y",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id7ld1dabf",
+      "from": "id3gf44188",
+      "to": "idmj2snbt8",
+      "type": "Depende de"
+    },
+    {
+      "id": "id7o4t1y0e",
+      "from": "id3gf44188",
+      "to": "idzplsk3d5",
+      "type": "Depende de"
+    },
+    {
+      "id": "idcsjcumvh",
+      "from": "id3gf44188",
+      "to": "idvxiut695",
+      "type": "Depende de"
+    },
+    {
+      "id": "ideyvdw02r",
+      "from": "id3gf44188",
+      "to": "idmdvbqgtq",
+      "type": "Depende de"
+    },
+    {
+      "id": "idkle00pou",
+      "from": "id3gf44188",
+      "to": "ido52v1sw3",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id097mjz8i",
+      "from": "id3gf44188",
+      "to": "idky7o13k7",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id6fcp6i3l",
+      "from": "id3gf44188",
+      "to": "idam6bo5ck",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idv2rzozw6",
+      "from": "id3gf44188",
+      "to": "idam6bo5ck",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idtp5mtqys",
+      "from": "idvxiut695",
+      "to": "idb1rk0zz6",
+      "type": "Depende de"
+    },
+    {
+      "id": "idjkod9hyz",
+      "from": "id6c4qnn7o",
+      "to": "idb1rk0zz6",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idrwj1n4wk",
+      "from": "id1c62hd9a",
+      "to": "idehcztxp4",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idqem59o3b",
+      "from": "idmsan7r4i",
+      "to": "idnoqlxmou",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "id07ibbt9e",
+      "from": "idh3zyrp05",
+      "to": "idnoqlxmou",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "ids5xzuw5t",
+      "from": "idb7u568aq",
+      "to": "idwcec3x4b",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idaizrecfv",
+      "from": "idb7u568aq",
+      "to": "idkkv7llmi",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "ids7xi1uii",
+      "from": "idb7u568aq",
+      "to": "idx0vpyg1b",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idzav9oguo",
+      "from": "id7tv1144y",
+      "to": "idh3zyrp05",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "idjzy1kvrq",
+      "from": "idmr9jb8l8",
+      "to": "idmsan7r4i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "id74yzgqg5",
+      "from": "idtjnihlml",
+      "to": "idmsan7r4i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "idemrrzaod",
+      "from": "ideh3c17cp",
+      "to": "idmsan7r4i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "idynwfnqg9",
+      "from": "idhdcvk8nm",
+      "to": "idmsan7r4i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "id6x8txsb0",
+      "from": "idjxowtvb9",
+      "to": "idmsan7r4i",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "id5x1piina",
+      "from": "id5tsgex3x",
+      "to": "idg3iaw5wz",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "id520eru7d",
+      "from": "idg3iaw5wz",
+      "to": "idl1maglte",
+      "type": "Se comunica(REST) con"
+    },
+    {
+      "id": "ideddls7ac",
+      "from": "idl1maglte",
+      "to": "idyszrp98m",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idertx6c5e",
+      "from": "idg3iaw5wz",
+      "to": "id7u2aa2b9",
+      "type": "Depende de"
+    },
+    {
+      "id": "id6bjpwo4b",
+      "from": "idb7u568aq",
+      "to": "idq8raqpru",
+      "type": "Accede (I/O) a"
+    },
+    {
+      "id": "idqzlx1oh9",
+      "from": "idb7u568aq",
+      "to": "idjzrhud39",
+      "type": "Accede (I/O) a"
+    }
+  ]
+}

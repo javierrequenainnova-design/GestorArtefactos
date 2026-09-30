@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gestor de Artefactos</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <h1>🧩 Gestor de Artefactos</h1>
+    <div class="actions">
+      <span id="saveStatus" class="save-status">Guardado</span>
+      <button id="btnExport">⬇ Exportar…</button>
+      <button id="btnImport">⬆ Importar…</button>
+      <button class="primary" id="btnNewArtifact">＋ Nuevo artefacto</button>
+    </div>
+  </header>
+  <div id="body">
+    <div id="sidebar">
+      <div class="sidebar-head">
+        <h2>Biblioteca de artefactos</h2>
+        <div class="lib-search">
+          <input type="search" id="libSearch" autocomplete="off" spellcheck="false"
+                 placeholder="Buscar por nombre, tipo o propiedad…" title="Buscar (Ctrl+F)">
+          <select id="libTypeFilter" title="Filtrar por tipo de artefacto">
+            <option value="">Todos los tipos</option>
+          </select>
+          <div id="libSearchInfo" class="lib-search-info"></div>
+        </div>
+      </div>
+      <div id="libraryList"></div>
+    </div>
+    <div id="canvasWrap">
+      <div id="canvasSizer">
+      <div id="canvas">
+        <svg id="linesHit"></svg>
+        <svg id="lines"><defs></defs></svg>
+      </div>
+      </div>
+      <div id="canvasHint">
+        <span class="hint-text">Arrastra artefactos desde la biblioteca. Usa 🔗 en un nodo para crear una relación. Ctrl + rueda para hacer zoom.</span>
+        <div id="zoomControls" class="zoom-controls">
+          <button type="button" id="zoomOut" title="Alejar (Ctrl + −)">−</button>
+          <button type="button" id="zoomReset" title="Restablecer al 100% (Ctrl + 0)">100%</button>
+          <button type="button" id="zoomIn" title="Acercar (Ctrl + +)">+</button>
+        </div>
+      </div>
+      <div id="legendPanel" class="legend-panel">
+        <button type="button" id="legendToggle" class="legend-toggle">
+          <span class="legend-title">Leyenda de relaciones</span>
+          <span class="legend-caret" id="legendCaret">▾</span>
+        </button>
+        <div id="legendList" class="legend-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="renderer.js"></script>
+</body>
+</html>
