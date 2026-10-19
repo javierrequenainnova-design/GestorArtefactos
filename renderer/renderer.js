@@ -105,8 +105,10 @@ function save(){
   if(el) el.textContent = 'Guardando…';
   clearTimeout(saveTimer);
   saveTimer = setTimeout(async ()=>{
-    await window.api.saveData(state);
-    if(el) el.textContent = 'Guardado';
+    const ok = await window.api.saveData(state);
+    // saveData devuelve false si no se pudo guardar en la carpeta conectada
+    // (p. ej. OneDrive sin sincronizar) y solo se ha guardado en el navegador.
+    if(el) el.textContent = ok === false ? '⚠ Solo en el navegador' : 'Guardado';
   }, 150);
 }
 function uid(){ return 'id'+Math.random().toString(36).slice(2,10); }
@@ -837,6 +839,59 @@ function initZoom(){
   updateZoomUi();
 }
 
+/* ---------- Arrastrar el fondo del lienzo para desplazarse (scroll) ---------- */
+// Además del scroll normal del navegador (rueda y barras de desplazamiento,
+// con Mayús+rueda para el horizontal), se puede pulsar y arrastrar sobre
+// cualquier zona vacía del lienzo para desplazarlo, como en la mayoría de
+// herramientas de diagramas.
+let justPanned = false;
+function initCanvasPan(){
+  const PAN_THRESHOLD = 4;
+  const sizer = document.getElementById('canvasSizer');
+  let panCtx = null;
+
+  canvasWrap.addEventListener('mousedown', e => {
+    // Solo con el botón izquierdo y sobre el fondo vacío (la cuadrícula o el
+    // margen gris al alejar el zoom): ni sobre un nodo ni sobre una línea, y
+    // no mientras se está creando una relación (ahí el clic tiene otro
+    // significado: cancelarla).
+    if(e.button !== 0 || relCtx) return;
+    if(e.target !== canvas && e.target !== sizer && e.target !== canvasWrap) return;
+    // Pulsar sobre una barra de desplazamiento también tiene como destino el
+    // contenedor: se distingue porque cae fuera de su área de contenido.
+    const r = canvasWrap.getBoundingClientRect();
+    if(e.clientX >= r.left + canvasWrap.clientWidth || e.clientY >= r.top + canvasWrap.clientHeight) return;
+    panCtx = {
+      startX: e.clientX, startY: e.clientY,
+      startScrollLeft: canvasWrap.scrollLeft, startScrollTop: canvasWrap.scrollTop,
+      moved: false
+    };
+    document.addEventListener('mousemove', onPanMove);
+    document.addEventListener('mouseup', onPanEnd);
+  });
+
+  function onPanMove(e){
+    if(!panCtx) return;
+    const dx = e.clientX - panCtx.startX, dy = e.clientY - panCtx.startY;
+    if(!panCtx.moved){
+      if(Math.hypot(dx, dy) < PAN_THRESHOLD) return;
+      panCtx.moved = true;
+      canvasWrap.classList.add('panning');
+    }
+    canvasWrap.scrollLeft = panCtx.startScrollLeft - dx;
+    canvasWrap.scrollTop = panCtx.startScrollTop - dy;
+  }
+  function onPanEnd(){
+    document.removeEventListener('mousemove', onPanMove);
+    document.removeEventListener('mouseup', onPanEnd);
+    if(panCtx && panCtx.moved){
+      canvasWrap.classList.remove('panning');
+      justPanned = true; // evita que el "click" posterior al arrastre cierre el foco/la relación
+    }
+    panCtx = null;
+  }
+}
+
 function canvasPoint(e){
   const rect = canvas.getBoundingClientRect();
   return {x: (e.clientX - rect.left) / zoom, y: (e.clientY - rect.top) / zoom};
@@ -938,7 +993,12 @@ function getTransitivelyRelatedNodeIds(startNodeId) {
     return new Set();
   }
 
-  const visited = new Set([startNodeId]);
+  // "shown" es lo que se resalta como relacionado; "seen" es todo lo que ya se ha
+  // recorrido (evita bucles). Un artefacto del mismo tipo que el foco puede seguir
+  // sirviendo de puente hacia otros artefactos, pero no se añade a "shown": no se
+  // debe mostrar como relacionado un arquetipo del mismo tipo que el seleccionado.
+  const shown = new Set([startNodeId]);
+  const seen = new Set([startNodeId]);
   const pending = [startNodeId];
 
   // Si el nodo seleccionado pertenece a un tipo limitado, durante este foco
@@ -960,13 +1020,16 @@ function getTransitivelyRelatedNodeIds(startNodeId) {
     return !NON_TRANSITIVE_TYPE_IDS.has(nodeTypeId);
   }
 
-  function addNode(nodeId) {
-    if (!nodeId || visited.has(nodeId)) {
+  function visitNode(nodeId) {
+    if (!nodeId || seen.has(nodeId)) {
       return;
     }
+    seen.add(nodeId);
 
-    // El nodo relacionado siempre se muestra.
-    visited.add(nodeId);
+    // Solo se muestra como relacionado si su tipo es distinto al del foco.
+    if (getNodeTypeId(nodeId) !== focusedTypeId) {
+      shown.add(nodeId);
+    }
 
     // Solo se sigue recorriendo a traves de el si su tipo no esta limitado,
     // o si la limitacion de ese tipo fue desactivada por el nodo seleccionado.
@@ -980,10 +1043,10 @@ function getTransitivelyRelatedNodeIds(startNodeId) {
 
     state.relations.forEach(relation => {
       if (relation.from === currentId) {
-        addNode(relation.to);
+        visitNode(relation.to);
       }
       if (relation.to === currentId) {
-        addNode(relation.from);
+        visitNode(relation.from);
       }
     });
 
@@ -993,16 +1056,16 @@ function getTransitivelyRelatedNodeIds(startNodeId) {
 
     // Contencion implicita: hijo -> servidor.
     if (currentNode && currentNode.parentId) {
-      addNode(currentNode.parentId);
+      visitNode(currentNode.parentId);
     }
 
     // Contencion implicita: servidor -> hijos.
     state.nodes
       .filter(node => node.parentId === currentId)
-      .forEach(child => addNode(child.id));
+      .forEach(child => visitNode(child.id));
   }
 
-  return visited;
+  return shown;
 }
 
 function isRelatedToFocus(nodeId){
@@ -1372,6 +1435,9 @@ function openRelTypeModal(fromId, toId){
   overlay.focus();
 }
 canvas.addEventListener('click', ()=>{
+  // Tras arrastrar el fondo para desplazarse, el navegador también genera un
+  // "click": se ignora (no era la intención de quitar el foco/cancelar nada).
+  if(justPanned){ justPanned = false; return; }
   if(relCtx) cancelRelation();
   if(focusedNodeId){ focusedNodeId=null; renderCanvas(); }
 });
@@ -1463,6 +1529,7 @@ window.api.onDataImported((data)=>{
 (async function init(){
   initLibrarySearch();
   initZoom();
+  initCanvasPan();
   buildRelMarkers();
   initLegend();
   state = await window.api.loadData();

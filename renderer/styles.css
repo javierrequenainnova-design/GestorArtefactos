@@ -1,4 +1,5 @@
 :root{
+  --hint-h:41px;   /* altura de la barra inferior de ayuda/zoom (la usan el lienzo y la propia barra) */
   --bg:#f4f5f7; --panel:#ffffff; --border:#e1e4e9; --text:#1f2430; --muted:#6b7280;
   --accent:#4f5fe8; --accent-dark:#3a47c4; --danger:#e5484d; --danger-dark:#c53a3e;
   --radius:10px;
@@ -38,10 +39,37 @@ button.ghost{background:transparent;border-color:transparent;}
 #canvasWrap{
   flex:1;
   position:relative;
-  overflow:auto;
-  padding-bottom:40px;
+  /* "scroll" (no "auto"): las dos barras se muestran siempre, también en
+     sistemas con barras ocultas por defecto (p. ej. macOS), para que el
+     desplazamiento horizontal y vertical sea siempre visible y alcanzable. */
+  overflow:scroll;
+  /* Termina justo encima de la barra inferior de ayuda/zoom (que es fija): así
+     la barra de desplazamiento horizontal y el final de la vertical no quedan
+     tapadas por ella. */
+  margin-bottom:var(--hint-h);
   background:var(--bg);
 }
+/* Barras de desplazamiento del lienzo: más gruesas y con contraste, fáciles de agarrar */
+#canvasWrap{ scrollbar-width:auto; scrollbar-color:#a8afc0 #eceef3; }
+#canvasWrap::-webkit-scrollbar{ width:14px; height:14px; }
+#canvasWrap::-webkit-scrollbar-track{ background:#eceef3; }
+#canvasWrap::-webkit-scrollbar-thumb{
+  background:#a8afc0;
+  border-radius:8px;
+  border:3px solid #eceef3;
+}
+#canvasWrap::-webkit-scrollbar-thumb:hover{ background:#8a92a8; }
+#canvasWrap::-webkit-scrollbar-corner{ background:#eceef3; }
+
+/* Cursor de "mano": se puede arrastrar el fondo vacío para desplazarse */
+#canvasWrap{ cursor:grab; }
+/* Mientras se arrastra, "agarrando" en todas partes (también sobre los nodos) */
+#canvasWrap.panning, #canvasWrap.panning *{ cursor:grabbing; }
+/* Los nodos no heredan la "mano" del fondo (sus botones, tirador y cabecera
+   siguen con sus propios cursores, que son más específicos). */
+.node{ cursor:default; }
+/* La barra inferior y la leyenda están dentro del contenedor pero no se arrastran */
+#canvasHint, #legendPanel{ cursor:default; }
 /* La cuadrícula pertenece al lienzo (no a su contenedor) para que escale con el
    zoom y se desplace junto con los artefactos. */
 /* Reserva en el área desplazable exactamente el tamaño del lienzo ya escalado
@@ -99,6 +127,7 @@ svg#linesHit .rel-hit.dimmed{pointer-events:none;}
   left:270px;
   right:0;
   bottom:0;
+  height:var(--hint-h);
   z-index:1000;
   padding:8px 12px;
   font-size:12px;
@@ -108,7 +137,7 @@ svg#linesHit .rel-hit.dimmed{pointer-events:none;}
   border-radius:0;
 }
 
-.modal-overlay{position:fixed;inset:0;background:rgba(20,22,30,.45);display:flex;align-items:center;justify-content:center;z-index:50;}
+.modal-overlay{position:fixed;inset:0;background:rgba(20,22,30,.45);display:flex;align-items:center;justify-content:center;z-index:2000;} /* por encima de la barra inferior (1000), la leyenda (900) y los avisos (950) */
 .modal{background:#fff;border-radius:12px;width:420px;max-width:92vw;max-height:88vh;overflow-y:auto;padding:20px;}
 .modal h3{margin:0 0 14px;font-size:15px;}
 .field{margin-bottom:12px;}
@@ -361,7 +390,7 @@ svg#lines .rel-line.dimmed {
 .legend-panel{
   position:fixed;
   top:58px;
-  right:12px;
+  right:30px;   /* 12px de margen + el ancho de la barra de desplazamiento vertical */
   z-index:900;
   background:#fff;
   border:1px solid var(--border);
@@ -393,3 +422,45 @@ svg#lines .rel-line.dimmed {
 .legend-row{display:flex;align-items:center;gap:8px;}
 .legend-swatch{flex-shrink:0;}
 .legend-label{color:var(--text);line-height:1.3;}
+
+/* ---------- Botón y modal "Carpeta de datos" (versión navegador) ---------- */
+#btnDataFolder{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+#btnDataFolder.folder-pending{background:#fff3e0;border-color:#f0b94d;color:#8a5a00;}
+#btnDataFolder.folder-pending:hover{background:#ffe8c2;}
+.folder-status-line{font-size:13px;color:var(--text);margin:-4px 0 14px;line-height:1.4;}
+.folder-status-line b{color:var(--accent-dark);}
+.folder-help-text{font-size:11.5px;color:var(--muted);margin:2px 0 14px;line-height:1.4;}
+.folder-help-text code{background:#f0f1f5;padding:1px 5px;border-radius:4px;}
+
+/* ---------- Aviso de combinación de cambios concurrentes ---------- */
+.concurrency-toast{
+  position:fixed;
+  left:50%;
+  /* por encima de la barra de ayuda y de la barra de desplazamiento horizontal */
+  bottom:calc(var(--hint-h) + 27px);
+  transform:translate(-50%, 12px);
+  background:#1f2430;
+  color:#fff;
+  padding:9px 16px;
+  border-radius:9px;
+  font-size:12.5px;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+  z-index:950;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s, transform .2s;
+  max-width:420px;
+  text-align:center;
+}
+.concurrency-toast.visible{
+  opacity:1;
+  transform:translate(-50%, 0);
+}
+
+/* ---------- Ayuda de OneDrive en la ventana de carpeta ---------- */
+.folder-onedrive{margin:0 0 12px;font-size:12px;color:var(--text);}
+.folder-onedrive summary{cursor:pointer;font-weight:600;color:var(--accent-dark);padding:4px 0;}
+.folder-onedrive ol{margin:6px 0 6px 18px;padding:0;line-height:1.45;}
+.folder-onedrive li{margin-bottom:4px;}
+.folder-onedrive p{margin:6px 0 0;color:var(--muted);line-height:1.45;}
+.folder-onedrive code{background:#f0f1f5;padding:1px 5px;border-radius:4px;}

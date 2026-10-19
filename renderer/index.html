@@ -11,6 +11,7 @@
     <h1>🧩 Gestor de Artefactos</h1>
     <div class="actions">
       <span id="saveStatus" class="save-status">Guardado</span>
+      <button id="btnDataFolder" title="Elegir dónde se guardan los datos">📁 Carpeta de datos…</button>
       <button id="btnExport">⬇ Exportar…</button>
       <button id="btnImport">⬆ Importar…</button>
       <button class="primary" id="btnNewArtifact">＋ Nuevo artefacto</button>
@@ -39,7 +40,7 @@
       </div>
       </div>
       <div id="canvasHint">
-        <span class="hint-text">Arrastra artefactos desde la biblioteca. Usa 🔗 en un nodo para crear una relación. Ctrl + rueda para hacer zoom.</span>
+        <span class="hint-text" title="Arrastra artefactos desde la biblioteca. Usa 🔗 en un nodo para crear una relación. Arrastra el fondo (o usa las barras, la rueda y Mayús + rueda) para desplazarte. Ctrl + rueda para hacer zoom.">Arrastra artefactos desde la biblioteca. Usa 🔗 en un nodo para crear una relación. Arrastra el fondo para desplazarte. Ctrl + rueda para zoom.</span>
         <div id="zoomControls" class="zoom-controls">
           <button type="button" id="zoomOut" title="Alejar (Ctrl + −)">−</button>
           <button type="button" id="zoomReset" title="Restablecer al 100% (Ctrl + 0)">100%</button>
@@ -56,6 +57,9 @@
     </div>
   </div>
 </div>
+<script src="merge-logic.js"></script>
+<script src="storage.js"></script>
 <script src="renderer.js"></script>
+<script src="folder-ui.js"></script>
 </body>
 </html>
